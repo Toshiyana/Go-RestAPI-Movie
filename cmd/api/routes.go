@@ -11,5 +11,9 @@ func (app *application) routes() *httprouter.Router {
 
 	router.HandlerFunc(http.MethodGet, "/status", app.statusHandler)
 
+	// v1: version.
+	router.HandlerFunc(http.MethodGet, "/v1/movie/:id", app.getOneMovie)
+	router.HandlerFunc(http.MethodGet, "/v1/movies", app.getAllMovies)
+
 	return router
 }

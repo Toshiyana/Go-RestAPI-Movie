@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: postgres
+    build:
+      context: .
+      dockerfile: ./docker/postgres/Dockerfile
+    environment:
+      POSTGRES_USER: ${POSTGRESQL_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
+      POSTGRES_DB: ${POSTGRESQL_DBNAME}
+    ports:
+    - ${POSTGRESQL_PORT}:5432
+    volumes:
+    - ./data/postgresql:/var/lib/postgresql/data/
+  web:
+    container_name: web
+    build:
+      context: .
+      dockerfile: ./docker/golang/Dockerfile
+    tty: true
+    volumes:
+      - .:/myapp
+    depends_on:
+      - postgres
+    ports:
+      - ${PORT}:8080
