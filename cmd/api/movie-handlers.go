@@ -39,7 +39,7 @@ func (app *application) getOneMovie(w http.ResponseWriter, r *http.Request) {
 	// 	UpdatedAt:   time.Now(),
 	// }
 
-	err = app.writeJson(w, http.StatusOK, movie, "movie")
+	err = app.writeJSON(w, http.StatusOK, movie, "movie")
 	if err != nil {
 		app.errorJSON(w, err)
 		return
@@ -53,7 +53,21 @@ func (app *application) getAllMovies(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = app.writeJson(w, http.StatusOK, movies, "movies")
+	err = app.writeJSON(w, http.StatusOK, movies, "movies")
+	if err != nil {
+		app.errorJSON(w, err)
+		return
+	}
+}
+
+func (app *application) getAllGenres(w http.ResponseWriter, r *http.Request) {
+	genres, err := app.models.DB.GenresAll()
+	if err != nil {
+		app.errorJSON(w, err)
+		return
+	}
+
+	err = app.writeJSON(w, http.StatusOK, genres, "genres")
 	if err != nil {
 		app.errorJSON(w, err)
 		return
