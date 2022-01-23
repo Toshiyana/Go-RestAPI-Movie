@@ -23,6 +23,9 @@ type config struct {
 	db   struct {
 		dsn string
 	}
+	jwt struct {
+		secret string
+	}
 }
 
 type AppStatus struct {
@@ -43,6 +46,8 @@ func main() {
 	// flag.IntVar(&cfg.port, "port", 4000, "Server port to listen on")
 	// flag.StringVar(&cfg.env, "env", "development", "Application enviornment (development|production)")
 	// flag.StringVar(&cfg.db.dsn, "dsn", "postgres://toshi:postoshiword@postgres/go-movies?sslmode=disable", "Postgres connection string")
+	// In production, you should save local enviornment variable, not code
+	// flag.StringVar(&cfg.jwt.secret, "jwt-secret", "2dce505d96a53c5768052ee90f3df2055657518dad489160df9913f66042e160", "secret")
 	// flag.Parse()
 
 	err := setConfig(&cfg)
@@ -111,6 +116,8 @@ func setConfig(cfg *config) error {
 	dbSSL := os.Getenv("POSTGRESQL_SSL")
 
 	cfg.db.dsn = fmt.Sprintf("host=%s port=%s dbname=%s user=%s password=%s sslmode=%s", dbHost, dbPort, dbName, dbUser, dbPass, dbSSL)
+
+	cfg.jwt.secret = os.Getenv("JWT_SECRET")
 
 	return nil
 }
