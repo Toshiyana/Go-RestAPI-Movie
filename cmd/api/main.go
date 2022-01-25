@@ -117,7 +117,7 @@ func setConfig(cfg *config) error {
 
 	cfg.db.dsn = fmt.Sprintf("host=%s port=%s dbname=%s user=%s password=%s sslmode=%s", dbHost, dbPort, dbName, dbUser, dbPass, dbSSL)
 
-	cfg.jwt.secret = os.Getenv("JWT_SECRET")
+	cfg.jwt.secret = os.Getenv("ACCESS_TOKEN_SECRET")
 
 	return nil
 }
