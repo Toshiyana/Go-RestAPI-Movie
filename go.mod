@@ -10,4 +10,7 @@ require (
 	golang.org/x/crypto v0.0.0-20220112180741-5e0467b6c7ce
 )
 
-require github.com/pascaldekloe/jwt v1.10.0 // indirect
+require (
+	github.com/graphql-go/graphql v0.8.0 // indirect
+	github.com/pascaldekloe/jwt v1.10.0 // indirect
+)
