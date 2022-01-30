@@ -18,6 +18,8 @@ func NewModels(db *sql.DB) Models {
 }
 
 // Movie is the type for movies
+// I use Movie in GraphQL, so you don't have to ignore json by "-".
+// In GraphQL, you can select data.
 type Movie struct {
 	ID          int            `json:"id"`
 	Title       string         `json:"title"`
@@ -27,9 +29,10 @@ type Movie struct {
 	Runtime     int            `json:"runtime"`
 	Rating      int            `json:"rating"`
 	MPAARating  string         `json:"mpaa_rating"`
-	CreatedAt   time.Time      `json:"-"`
-	UpdatedAt   time.Time      `json:"-"`
+	CreatedAt   time.Time      `json:"created_at"`
+	UpdatedAt   time.Time      `json:"updated_at"`
 	MovieGenre  map[int]string `json:"genres"`
+	Poster      string         `json:"poster"`
 }
 
 // Genre is the type for genre

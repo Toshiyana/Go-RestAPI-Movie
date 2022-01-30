@@ -102,6 +102,9 @@ var movieType = graphql.NewObject(
 			"updated_at": &graphql.Field{
 				Type: graphql.DateTime,
 			},
+			"poster": &graphql.Field{
+				Type: graphql.String,
+			},
 		},
 	},
 )
@@ -126,11 +129,11 @@ func (app *application) moviesGraphQL(w http.ResponseWriter, r *http.Request) {
 	params := graphql.Params{Schema: schema, RequestString: query}
 	resp := graphql.Do(params)
 	if len(resp.Errors) > 0 {
-		app.errorJSON(w, errors.New(fmt.Sprintf("failed: %+v", resp.Errors)))
+		app.errorJSON(w, fmt.Errorf("failed: %+v", resp.Errors))
 	}
 
 	j, _ := json.MarshalIndent(resp, "", "  ")
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
+	// w.WriteHeader(http.StatusOK)
 	w.Write(j)
 }
