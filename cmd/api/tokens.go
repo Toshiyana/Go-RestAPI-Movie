@@ -47,7 +47,7 @@ func (app *application) Signin(w http.ResponseWriter, r *http.Request) {
 	claims.Subject = fmt.Sprint(validUser.ID)
 	claims.Issued = jwt.NewNumericTime(time.Now())
 	claims.NotBefore = jwt.NewNumericTime(time.Now())
-	claims.Expires = jwt.NewNumericTime(time.Now().Add(24 * time.Hour))
+	claims.Expires = jwt.NewNumericTime(time.Now().Add(15 * time.Minute))
 	claims.Issuer = "mydomain.com"
 	claims.Audiences = []string{"mydomain.com"}
 

@@ -134,10 +134,6 @@ func (app *application) deleteMovie(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (app *application) insertMovie(w http.ResponseWriter, r *http.Request) {
-
-}
-
 // MoviePayload is gotten from forms in frontend
 type MoviePayload struct {
 	ID          string `json:"id"`
